@@ -1,0 +1,25 @@
+import type { MetadataRoute } from "next";
+
+export default function manifest(): MetadataRoute.Manifest {
+  return {
+    name: "LinkPocket",
+    short_name: "LinkPocket",
+    description: "흥미로운 웹 콘텐츠를 포켓에 담아보세요.",
+    start_url: "/",
+    display: "standalone",
+    background_color: "#ffffff",
+    theme_color: "#000000",
+    icons: [
+      {
+        src: "/icon-32.png",
+        sizes: "32x32",
+        type: "image/png",
+      },
+      {
+        src: "/icon-96.png",
+        sizes: "96x96",
+        type: "image/png",
+      },
+    ],
+  };
+}
