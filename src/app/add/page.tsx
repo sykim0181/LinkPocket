@@ -1,8 +1,10 @@
+import AddLinkForm from "@/components/AddLinkForm";
+
 const Page = () => {
   return (
     <div>
-      <h1>Add Page</h1>
-      <p>This is the add page.</p>
+      <h1>링크 추가</h1>
+      <AddLinkForm />
     </div>
   );
 };

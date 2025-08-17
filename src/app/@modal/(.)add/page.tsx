@@ -1,11 +1,11 @@
+import AddLinkForm from "@/components/AddLinkForm";
 import Modal from "@/components/Modal";
 
 const page = () => {
 
   return (
-    <Modal>
-      <h1>Add Page</h1>
-      <p>This is the add page.</p>
+    <Modal title="링크 추가">
+      <AddLinkForm />
     </Modal>
   );
 };
