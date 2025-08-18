@@ -2,11 +2,14 @@
 
 import { createLinkRecord } from "@/lib/linkFactory";
 import { addLink } from "@/lib/linkRepository";
+import { useRouter } from "next/navigation";
 import { FormEvent, useRef, useState } from "react";
 
 const AddLinkForm = () => {
   const [url, setUrl] = useState<string>("");
   const memoRef = useRef<HTMLTextAreaElement | null>(null);
+
+  const router = useRouter();
 
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -33,6 +36,8 @@ const AddLinkForm = () => {
     // db에 저장
     const record = createLinkRecord(url, metadata, memo);
     await addLink(record);
+
+    router.back();
   };
 
   return (
@@ -49,7 +54,10 @@ const AddLinkForm = () => {
         <label className="font-bold">메모</label>
         <textarea className="border-1" ref={memoRef} />
       </div>
-      <button className="bg-black text-white rounded p-2" disabled={!url}>
+      <button
+        className="bg-black text-white rounded p-2 cursor-pointer"
+        disabled={!url}
+      >
         추가
       </button>
     </form>
