@@ -7,7 +7,11 @@ interface LinkItemProps {
 
 const LinkItem = ({ link }: LinkItemProps) => {
   return (
-    <Link className="link-item" href={link.canonicalUrl ?? link.url}>
+    <Link
+      className="link-item"
+      href={link.canonicalUrl ?? link.url}
+      target="_blank"
+    >
       <img
         src={link.image}
         alt={link.title}
