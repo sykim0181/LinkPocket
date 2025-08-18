@@ -1,13 +1,7 @@
-import AddLinkForm from "@/components/AddLinkForm";
-import Modal from "@/components/Modal";
+import AddLinkModal from "@/components/AddLinkModal";
 
 const page = () => {
-
-  return (
-    <Modal title="링크 추가">
-      <AddLinkForm />
-    </Modal>
-  );
+  return <AddLinkModal />;
 };
 
 export default page;
