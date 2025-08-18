@@ -1,8 +1,11 @@
-const Page = () => {
+import LinkDetail from "@/components/LinkDetail";
+
+const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
+  const { id } = await params;
+
   return (
-    <div>
-      <h1>View Page</h1>
-      <p>This is the view page.</p>
+    <div className="max-w-[1024px] mx-auto">
+      <LinkDetail linkId={id} />
     </div>
   );
 };

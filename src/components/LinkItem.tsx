@@ -26,9 +26,9 @@ const LinkItem = ({ link }: LinkItemProps) => {
   return (
     <>
       <Link
-        className="link-item"
-        href={link.canonicalUrl ?? link.url}
-        target="_blank"
+        href={`/view/${link.id}`}
+        // href={link.canonicalUrl ?? link.url}
+        // target="_blank"
         {...longPressHandler()}
       >
         <img
