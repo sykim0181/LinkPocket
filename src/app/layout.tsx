@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import QueryProvider from "@/components/QueryProvider";
+import Header from "@/components/Header";
 
 export const metadata: Metadata = {
   title: "LinkPocket",
@@ -16,8 +17,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>
+      <body className="bg-gray-100">
         <QueryProvider>
+          <Header />
           <main>
             {modal}
             {children}
