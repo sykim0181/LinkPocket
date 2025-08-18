@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import QueryProvider from "@/components/QueryProvider";
 
 export const metadata: Metadata = {
   title: "LinkPocket",
@@ -16,11 +17,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <main>
-          {modal}
-          {children}
-        </main>
-        <div id="modal-root" />
+        <QueryProvider>
+          <main>
+            {modal}
+            {children}
+          </main>
+          <div id="modal-root" />
+        </QueryProvider>
       </body>
     </html>
   );

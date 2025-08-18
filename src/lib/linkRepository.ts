@@ -3,11 +3,14 @@
 import { LinkRecord } from "@/types/link";
 import { getDB } from "./idb";
 
+export const linkRepoEvent = new EventTarget();
+
 const TABLE_NAME = "links";
 
 export async function addLink(record: LinkRecord) {
   const db = await getDB();
   await db.add(TABLE_NAME, record);
+  linkRepoEvent.dispatchEvent(new Event("changed"));
 }
 
 export async function updateLink(id: string, record: Partial<LinkRecord>) {
@@ -17,11 +20,13 @@ export async function updateLink(id: string, record: Partial<LinkRecord>) {
     throw new Error(`Link with id ${id} not found`);
   }
   await db.put(TABLE_NAME, { ...cur, ...record }, id);
+  linkRepoEvent.dispatchEvent(new Event("changed"));
 }
 
 export async function deleteLink(id: string) {
   const db = await getDB();
   await db.delete(TABLE_NAME, id);
+  linkRepoEvent.dispatchEvent(new Event("changed"));
 }
 
 export async function getLink(id: string): Promise<LinkRecord | undefined> {
