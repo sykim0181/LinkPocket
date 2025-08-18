@@ -1,7 +1,7 @@
 "use client";
 
 import { getAllLinks } from "@/lib/linkRepository";
-import { LinkRecord } from "@/types/Link";
+import { LinkRecord } from "@/types/link";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 

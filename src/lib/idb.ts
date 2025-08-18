@@ -1,6 +1,6 @@
 "use client";
 
-import { LinkRecord } from "@/types/Link";
+import { LinkRecord } from "@/types/link";
 import { DBSchema, openDB } from "idb";
 
 interface LinkPocketDB extends DBSchema {

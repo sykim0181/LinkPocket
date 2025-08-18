@@ -1,6 +1,6 @@
 "use client";
 
-import { LinkRecord } from "@/types/Link";
+import { LinkRecord } from "@/types/link";
 import { getDB } from "./idb";
 
 const TABLE_NAME = "links";

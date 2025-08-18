@@ -1,4 +1,4 @@
-import { LinkRecord } from "@/types/Link";
+import { LinkRecord } from "@/types/link";
 import { Metadata } from "@/types/Metadata";
 
 function generateId(): string {
