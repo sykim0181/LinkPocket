@@ -1,5 +1,5 @@
+import { LinkRecord } from "@/types/Link";
 import { Metadata } from "@/types/Metadata";
-import { LinkRecord } from "./idb";
 
 function generateId(): string {
   return crypto.randomUUID();

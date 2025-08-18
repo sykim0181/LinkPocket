@@ -1,15 +1,7 @@
-import { DBSchema, openDB } from "idb";
+"use client";
 
-export interface LinkRecord {
-  id: string;
-  url: string;
-  title?: string;
-  description?: string;
-  image?: string;
-  canonicalUrl?: string;
-  memo?: string;
-  createdAt: Date;
-}
+import { LinkRecord } from "@/types/Link";
+import { DBSchema, openDB } from "idb";
 
 interface LinkPocketDB extends DBSchema {
   links: {
@@ -19,9 +11,11 @@ interface LinkPocketDB extends DBSchema {
   };
 }
 
-export const dbp = openDB<LinkPocketDB>("link-pocket", undefined, {
-  upgrade(db) {
-    const linkStore = db.createObjectStore("links", { keyPath: "id" });
-    linkStore.createIndex("createdAt", "createdAt");
-  },
-});
+export async function getDB() {
+  return openDB<LinkPocketDB>("link-pocket", undefined, {
+    upgrade(db) {
+      const linkStore = db.createObjectStore("links", { keyPath: "id" });
+      linkStore.createIndex("createdAt", "createdAt");
+    },
+  });
+}
