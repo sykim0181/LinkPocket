@@ -1,5 +1,7 @@
 "use client";
 
+import { createLinkRecord } from "@/lib/linkFactory";
+import { addLink } from "@/lib/linkRepository";
 import { FormEvent, useState } from "react";
 
 const AddLinkForm = () => {
@@ -24,8 +26,10 @@ const AddLinkForm = () => {
     }
 
     const metadata = data.metadata;
-    console.log("Fetched metadata:", metadata);
+
     // db에 저장
+    const record = createLinkRecord(url, metadata)
+    await addLink(record);
   };
 
   return (
