@@ -10,6 +10,18 @@ self.addEventListener("install", (event) => {
   );
 });
 
+self.addEventListener("activate", (event) => {
+  event.waitUntil(
+    caches.keys().then((keyList) => {
+      for (const key of keyList) {
+        if (key !== PRECACHE && key !== RUNTIME) {
+          caches.delete(key);
+        }
+      }
+    })
+  );
+});
+
 self.addEventListener("fetch", (event) => {
   const req = event.request;
 
