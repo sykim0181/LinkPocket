@@ -2,14 +2,14 @@
 
 import { LinkRecord } from "@/types/link";
 import { getDB } from "./idb";
-import { LINK_EVENT, linkEvents } from "./linkEvents";
+import { LINK_EVENT, linkEventBus } from "./linkEventBus";
 
 const TABLE_NAME = "links";
 
 export async function addLink(record: LinkRecord) {
   const db = await getDB();
   await db.add(TABLE_NAME, record);
-  linkEvents.emit(LINK_EVENT.LINKS_CHANGED, { op: "add", record });
+  linkEventBus.emit(LINK_EVENT.LINKS_CHANGED, { op: "add", record });
 }
 
 export async function updateLink(id: string, record: Partial<LinkRecord>) {
@@ -20,7 +20,7 @@ export async function updateLink(id: string, record: Partial<LinkRecord>) {
   }
   const newRecord = { ...cur, ...record };
   await db.put(TABLE_NAME, newRecord, id);
-  linkEvents.emit(LINK_EVENT.LINKS_CHANGED, {
+  linkEventBus.emit(LINK_EVENT.LINKS_CHANGED, {
     op: "update",
     record: newRecord,
   });
@@ -29,7 +29,7 @@ export async function updateLink(id: string, record: Partial<LinkRecord>) {
 export async function deleteLink(id: string) {
   const db = await getDB();
   await db.delete(TABLE_NAME, id);
-  linkEvents.emit(LINK_EVENT.LINKS_CHANGED, { op: "delete", id });
+  linkEventBus.emit(LINK_EVENT.LINKS_CHANGED, { op: "delete", id });
 }
 
 export async function getLink(id: string): Promise<LinkRecord | undefined> {

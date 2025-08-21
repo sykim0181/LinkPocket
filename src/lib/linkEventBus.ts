@@ -15,7 +15,7 @@ export type RepoEvents = {
 
 type EventName = LINK_EVENT;
 
-class LinkEvents {
+class LinkEventBus {
   private et: EventTarget;
 
   constructor() {
@@ -39,4 +39,4 @@ class LinkEvents {
   }
 }
 
-export const linkEvents = new LinkEvents();
+export const linkEventBus = new LinkEventBus();
