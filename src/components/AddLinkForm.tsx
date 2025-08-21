@@ -1,7 +1,6 @@
 "use client";
 
-import { createLinkRecord } from "@/lib/linkFactory";
-import { addLink } from "@/lib/linkRepository";
+import useAddLinkMutation from "@/hooks/useAddLinkMutation";
 import { useRouter } from "next/navigation";
 import { FormEvent, useRef, useState } from "react";
 
@@ -11,33 +10,17 @@ const AddLinkForm = () => {
 
   const router = useRouter();
 
+  const { mutate, isPending } = useAddLinkMutation({
+    onSuccess: () => router.back(),
+    onError: (error: Error) => alert("링크 추가 실패"),
+  });
+
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
     if (!url) return;
-
     const memo = memoRef.current?.value;
-
-    // url에서 데이터 가져오기
-    const response = await fetch("/api/metadata", {
-      method: "POST",
-      body: JSON.stringify({ url }),
-    });
-    const data = await response.json();
-
-    if (!response.ok) {
-      // 에러 처리
-      console.error(`Failed to fetch metadata: ${data.error}`);
-      return;
-    }
-
-    const metadata = data.metadata;
-
-    // db에 저장
-    const record = createLinkRecord(url, metadata, memo);
-    await addLink(record);
-
-    router.back();
+    mutate({ url, memo });
   };
 
   return (
@@ -58,7 +41,7 @@ const AddLinkForm = () => {
         className="bg-black text-white rounded p-2 cursor-pointer"
         disabled={!url}
       >
-        추가
+        {isPending ? "..." : "추가"}
       </button>
     </form>
   );
