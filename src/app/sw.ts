@@ -33,7 +33,7 @@ const cacheStrategies: RuntimeCaching[] = [
     handler: new CacheFirst({
       cacheName: "runtime",
       plugins: [
-        new CacheableResponsePlugin({ statuses: [200] }),
+        new CacheableResponsePlugin({ statuses: [0, 200] }),
         new ExpirationPlugin({
           maxEntries: 1000,
           maxAgeSeconds: 60 * 60 * 24 * 7,
