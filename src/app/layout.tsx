@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import QueryProvider from "@/components/QueryProvider";
 import Header from "@/components/Header";
+import LinkEventSubscriber from "@/components/LinkEventSubscriber";
 
 export const metadata: Metadata = {
   title: "LinkPocket",
@@ -24,7 +25,9 @@ export default function RootLayout({
             {modal}
             {children}
           </main>
+
           <div id="modal-root" />
+          <LinkEventSubscriber />
         </QueryProvider>
       </body>
     </html>
