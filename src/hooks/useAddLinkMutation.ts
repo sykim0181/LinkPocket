@@ -21,8 +21,7 @@ const useAddLinkMutation = ({
 
       if (!response.ok) {
         // 에러 처리
-        console.error(`Failed to fetch metadata: ${data.error}`);
-        return;
+        throw new Error(`Failed to fetch metadata: ${data.error}`);
       }
 
       const metadata = data.metadata;
