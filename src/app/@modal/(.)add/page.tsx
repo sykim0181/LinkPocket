@@ -1,4 +1,4 @@
-import AddLinkModal from "@/components/AddLinkModal";
+import AddLinkModal from "@/components/Home/AddLinkModal";
 
 const page = () => {
   return <AddLinkModal />;

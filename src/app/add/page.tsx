@@ -2,10 +2,13 @@ import AddLinkForm from "@/components/AddLinkForm";
 
 const Page = () => {
   return (
-    <div className="max-w-[500px] m-auto flex flex-col gap-5">
-      <h1 className="text-2xl">링크 추가</h1>
+    <>
+      <div className="mb-6">
+        <h1 className="text-2xl font-bold">Add New Link</h1>
+        <p className="text-gray-500">Save a link to your LinkPocket</p>
+      </div>
       <AddLinkForm />
-    </div>
+    </>
   );
 };
 

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import QueryProvider from "@/components/QueryProvider";
-import Header from "@/components/Header";
+// import Header from "@/components/Header";
 import LinkEventSubscriber from "@/components/LinkEventSubscriber";
 
 export const metadata: Metadata = {
@@ -20,11 +20,9 @@ export default function RootLayout({
     <html lang="en">
       <body className="bg-gray-100">
         <QueryProvider>
-          <Header />
-          <main>
-            {modal}
-            {children}
-          </main>
+          {/* <Header /> */}
+          {modal}
+          {children}
 
           <div id="modal-root" />
           <LinkEventSubscriber />

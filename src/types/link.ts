@@ -6,5 +6,6 @@ export interface LinkRecord {
   image?: string;
   canonicalUrl?: string;
   memo?: string;
+  tags?: [];
   createdAt: Date;
 }
