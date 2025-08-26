@@ -49,7 +49,7 @@ const LinkDetail = ({ linkId }: LinkDetailProps) => {
           <h2 className="font-bold text-xl">Tags</h2>
           <div className="flex flex-row gap-4">
             {data.tags?.map((tag) => (
-              <Badge>{tag}</Badge>
+              <Badge key={tag}>{tag}</Badge>
             ))}
           </div>
         </div>

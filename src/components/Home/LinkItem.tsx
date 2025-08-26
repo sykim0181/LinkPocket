@@ -59,7 +59,7 @@ const LinkItem = ({ link }: LinkItemProps) => {
             {!link.tags ? (
               <Badge>default</Badge>
             ) : (
-              link.tags.map((tag) => <Badge>{tag}</Badge>)
+              link.tags.map((tag) => <Badge key={tag}>{tag}</Badge>)
             )}
           </div>
         </Card>
