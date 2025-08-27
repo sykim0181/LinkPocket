@@ -1,11 +1,20 @@
 import { ReactNode } from "react";
 import Header from "../common/Header";
+import { cn } from "@/lib/utils";
 
-const LayoutWithHeader = ({ children }: { children: ReactNode }) => {
+const LayoutWithHeader = ({
+  children,
+  className,
+}: {
+  children: ReactNode;
+  className?: string;
+}) => {
   return (
     <>
       <Header />
-      <div className="max-w-(--max-width) mx-auto p-4">{children}</div>
+      <main className={cn("max-w-(--max-width) mx-auto", className)}>
+        {children}
+      </main>
     </>
   );
 };
