@@ -14,6 +14,7 @@ export async function POST(req: Request) {
     const res = await fetch(url);
     const html = await res.text();
     const rootElement = parse(html);
+    console.log("head:", rootElement.querySelector("head"));
 
     let targetElement = rootElement;
     targetElement = await preProcess(url, rootElement);
