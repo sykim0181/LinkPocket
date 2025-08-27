@@ -32,6 +32,7 @@ const LinkItem = ({ link }: LinkItemProps) => {
                 <img
                   className="shrink-0 w-full h-full object-cover"
                   src={link.image}
+                  referrerPolicy="no-referrer"
                 />
               ) : (
                 <div className="w-full h-full bg-gray-100" />

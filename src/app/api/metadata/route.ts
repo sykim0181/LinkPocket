@@ -1,6 +1,6 @@
 import { Metadata } from "@/types/Metadata";
 import { NextResponse } from "next/server";
-import parse from "node-html-parser";
+import parse, { HTMLElement } from "node-html-parser";
 
 export async function POST(req: Request) {
   const { url } = await req.json();
@@ -15,25 +15,42 @@ export async function POST(req: Request) {
     const html = await res.text();
     const rootElement = parse(html);
 
-    const title = rootElement
-      .querySelector("meta[property='og:title']")
-      ?.getAttribute("content");
-    const description = rootElement
-      .querySelector("meta[property='og:description']")
-      ?.getAttribute("content");
-    const image = rootElement
-      .querySelector("meta[property='og:image']")
-      ?.getAttribute("content");
+    let targetElement = rootElement;
+    targetElement = await preProcess(url, rootElement);
 
-    let canonicalUrl = rootElement
-      .querySelector("link[rel='canonical']")
-      ?.getAttribute("href");
-    if (!canonicalUrl) {
-      const ogUrl = rootElement
-        .querySelector("meta[property='og:url']")
+    const title =
+      targetElement
+        .querySelector("meta[property='og:title']")
+        ?.getAttribute("content") ||
+      targetElement.querySelector("title")?.text.trim();
+
+    const description =
+      targetElement
+        .querySelector("meta[property='og:description']")
+        ?.getAttribute("content") ||
+      targetElement
+        .querySelector("meta[name='description']")
+        ?.getAttribute("content") ||
+      targetElement
+        .querySelector("meta[name='twitter:description']")
         ?.getAttribute("content");
-      canonicalUrl = ogUrl || res.url;
-    }
+
+    const image =
+      targetElement
+        .querySelector("meta[property='og:image']")
+        ?.getAttribute("content") ||
+      targetElement
+        .querySelector("meta[name='twitter:image']")
+        ?.getAttribute("content");
+
+    const canonicalUrl =
+      targetElement
+        .querySelector("link[rel='canonical']")
+        ?.getAttribute("href") ||
+      targetElement
+        .querySelector("meta[property='og:url']")
+        ?.getAttribute("content") ||
+      res.url;
 
     const metadata: Metadata = {
       title,
@@ -45,4 +62,25 @@ export async function POST(req: Request) {
   } catch (error) {
     return NextResponse.json({ error }, { status: 500 });
   }
+}
+
+async function preProcess(url: string, rootElement: HTMLElement) {
+  const nurl = new URL(url);
+
+  const isNaverBlog = /(^|\.)blog\.naver\.com$/i.test(nurl.hostname);
+
+  if (isNaverBlog) {
+    const src = rootElement
+      .querySelector("iframe#mainFrame")
+      ?.getAttribute("src");
+    if (!src) {
+      return rootElement;
+    }
+    const finalUrl = new URL(src, url);
+    const res = await fetch(finalUrl);
+    const html = await res.text();
+    return parse(html);
+  }
+
+  return rootElement;
 }
