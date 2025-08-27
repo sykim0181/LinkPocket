@@ -13,6 +13,7 @@ export async function POST(req: Request) {
     // 페이지의 메타데이터 가져오기
     const res = await fetch(url);
     const html = await res.text();
+    console.log("html:", html);
     const rootElement = parse(html);
     console.log("head:", rootElement.querySelector("head"));
 
