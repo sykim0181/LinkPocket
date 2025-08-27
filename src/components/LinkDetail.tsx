@@ -45,14 +45,14 @@ const LinkDetail = ({ linkId }: LinkDetailProps) => {
             <p>{data.memo}</p>
           </div>
         </div>
-        <div>
+        {/* <div>
           <h2 className="font-bold text-xl">Tags</h2>
           <div className="flex flex-row gap-4">
             {data.tags?.map((tag) => (
               <Badge key={tag}>{tag}</Badge>
             ))}
           </div>
-        </div>
+        </div> */}
       </div>
     )
   );
