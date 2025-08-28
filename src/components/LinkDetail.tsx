@@ -21,7 +21,11 @@ const LinkDetail = ({ linkId }: LinkDetailProps) => {
         <div className="flex flex-row gap-4">
           <div className="w-[150px] h-[150px] border border-gray-100 shrink-0">
             {data.image && (
-              <img src={data.image} className="w-full h-full object-cover" />
+              <img
+                src={data.image}
+                className="w-full h-full object-cover"
+                referrerPolicy="no-referrer"
+              />
             )}
           </div>
           <div className="flex flex-col gap-4">
